@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app1/services/api_service.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'strings.dart';
 import 'worldmapmain.dart';
 import 'tablemainfragment.dart';
@@ -8,16 +10,90 @@ import 'showtablefragment.dart';
 import 'caseschartfragment.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(CovidApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  static const String _title = 'COVID Prediction App';
+class CovidApp extends StatefulWidget {
+  @override
+  _CovidAppState createState() => _CovidAppState();
+}
+
+class _CovidAppState extends State<CovidApp> {
+  // Set default `_initialized` and `_error` state to false
+  bool _initialized = false;
+  bool _error = false;
+
+  // Define an async function to fetch data from API
+  void fetchApiData() async {
+    final apiService = ApiService();
+
+    try {
+      // Wait for loading data
+      var predictionList = await apiService.getPredictionsList();
+      print(predictionList);
+      setState(() => _initialized = true);
+    } catch (e) {
+      print(e);
+      // Set `_error` state to true if fetching data was failure
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    fetchApiData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Show error message if fetching failed
+    if (_error) {
+      return ErrorAppWidget();
+    }
+
+    // Show a loader until data is fetching
+    if (!_initialized) {
+      return LoadingAppWidget();
+    }
+
+    return MaterialAppWidget();
+  }
+}
+
+class ErrorAppWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: SpinKitRotatingCircle(
+        size: 50.0,
+        color: Colors.blue,
+      ),
+    );
+  }
+}
+
+class LoadingAppWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.green,
+      child: SpinKitRotatingCircle(
+        size: 50.0,
+        color: Colors.blue,
+      ),
+    );
+  }
+}
+
+class MaterialAppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+      title: 'COVID Prediction App',
       theme: ThemeData(primarySwatch: Colors.green),
       home: MainFragment(),
     );
@@ -32,6 +108,9 @@ class MainFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var apiService = ApiService();
+    // var list = await apiService.getPredictionsList();
+
     Widget titleSection = Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

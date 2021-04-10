@@ -1,3 +1,5 @@
+import 'package:flutter_app1/services/service_helper.dart';
+
 import 'output.dart';
 
 class Region {
@@ -24,7 +26,7 @@ class Region {
       region: json['region'],
       lat: double.parse(json['lat']),
       long: double.parse(json['long']),
-      predicted: true,
+      predicted: json['predicted'],
       outputs: outputs,
     );
   }
