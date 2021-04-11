@@ -29,7 +29,7 @@ class _CovidAppState extends State<CovidApp> {
 
     try {
       // Wait for loading data
-      var predictionList = await apiService.getPredictionsList();
+      var predictionList = await apiService.getPredictionsListTest();
       print(predictionList);
       setState(() => _initialized = true);
     } catch (e) {
@@ -108,9 +108,6 @@ class MainFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var apiService = ApiService();
-    // var list = await apiService.getPredictionsList();
-
     Widget titleSection = Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_app1/models/output.dart';
 import 'package:flutter_app1/models/region.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,5 +34,46 @@ class ApiService {
     } else {
       throw Exception('Unable to perform request!');
     }
+  }
+
+  Future<List<Region>> getPredictionsListTest() async {
+    return [
+      Region(
+        region: 'Poland',
+        lat: 12.2,
+        long: 34.3,
+        predicted: true,
+        outputs: [
+          Output(date: DateTime.utc(2020, 04, 21), cases: 23),
+          Output(date: DateTime.utc(2020, 04, 22), cases: 43),
+          Output(date: DateTime.utc(2020, 04, 23), cases: 56),
+          Output(date: DateTime.utc(2020, 04, 24), cases: 123),
+        ],
+      ),
+      Region(
+        region: 'Czechy',
+        lat: 22.2,
+        long: 34.3,
+        predicted: true,
+        outputs: [
+          Output(date: DateTime.utc(2020, 04, 21), cases: 0),
+          Output(date: DateTime.utc(2020, 04, 22), cases: 0),
+          Output(date: DateTime.utc(2020, 04, 23), cases: 42),
+          Output(date: DateTime.utc(2020, 04, 24), cases: 567),
+        ],
+      ),
+      Region(
+        region: 'USA',
+        lat: 42.2,
+        long: -34.3,
+        predicted: true,
+        outputs: [
+          Output(date: DateTime.utc(2020, 04, 21), cases: 123),
+          Output(date: DateTime.utc(2020, 04, 22), cases: 143),
+          Output(date: DateTime.utc(2020, 04, 23), cases: 256),
+          Output(date: DateTime.utc(2020, 04, 24), cases: 3123),
+        ],
+      ),
+    ];
   }
 }
