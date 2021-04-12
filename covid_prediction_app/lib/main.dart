@@ -9,6 +9,7 @@ import 'tablemainfragment.dart';
 import 'showmapfragment.dart';
 import 'showtablefragment.dart';
 import 'caseschartfragment.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(CovidApp());
@@ -47,6 +48,8 @@ class _CovidAppState extends State<CovidApp> {
     fetchApiData();
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -235,21 +238,26 @@ class MainFragment extends StatelessWidget {
 //bottom navigation
 class NavDrawer extends StatelessWidget {
   @override
+
+
   Widget build(BuildContext context) {
+
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              'IMPORTANT INFORMATION\n ABOUT\n CORONAVIRUS',
+              'IMPORTANT INFORMATION\n ABOUT\n CORONAVIRUS !',
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             decoration: BoxDecoration(
                 color: Colors.green,
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage('Images/protection.png'))),
+                // image: DecorationImage(
+                //     fit: BoxFit.fill,
+                //     image: AssetImage('Images/protection.png'))
+            ),
           ),
           ListTile(
               leading: Icon(Icons.verified_user),
@@ -259,7 +267,11 @@ class NavDrawer extends StatelessWidget {
               ),
               selectedTileColor: Color.fromARGB(100, 10, 180, 80),
               tileColor: Color.fromARGB(190, 10, 255, 72),
-              onTap: () {}),
+              onTap: () {
+                   const url = 'https://www.gov.pl';
+                    launch(url);
+
+              }),
           ListTile(
             leading: Icon(Icons.warning),
             title: Text(
@@ -267,7 +279,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(200, 190, 85, 172),
-            onTap: () {},
+            onTap: () {
+              const url = 'https://www.who.int';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.warning_amber_outlined),
@@ -276,7 +291,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(190, 10, 255, 72),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.nhs.uk';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.info),
@@ -285,7 +303,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(200, 190, 85, 172),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.msn.com';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.perm_device_info),
@@ -294,7 +315,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(190, 10, 255, 72),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.gov.uk';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.insert_drive_file_outlined),
@@ -303,7 +327,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(200, 190, 85, 172),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.covid19.nih.gov';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.ad_units),
@@ -312,7 +339,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(190, 10, 255, 72),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.cdc.gov';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.where_to_vote_outlined),
@@ -321,7 +351,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(200, 190, 85, 172),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.edition.cnn.com';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.where_to_vote_rounded),
@@ -330,19 +363,49 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(190, 10, 255, 72),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.sbcovid19.com';
+              launch(url);
+            },
           ),
           ListTile(
             leading: Icon(Icons.image_aspect_ratio_outlined),
             title: Text(
-              'www.onet.com',
+              'www.gouvernement.fr',
               textScaleFactor: 1.2,
             ),
             tileColor: Color.fromARGB(200, 190, 85, 172),
-            onTap: () => {},
+            onTap: () {
+              const url = 'https://www.gouvernement.fr';
+              launch(url);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.aspect_ratio_rounded),
+            title: Text(
+              'www.mass.gov',
+              textScaleFactor: 1.2,
+            ),
+            tileColor: Color.fromARGB(190, 10, 255, 72),
+            onTap: () {
+              const url = 'https://www.mass.gov/';
+              launch(url);
+            },
+
+
           ),
         ],
       ),
     );
   }
 }
+
+
+//   const url = 'https://www.gov.pl';
+//   if (await canLaunch(url)) {
+//   await launch(url);
+//   } else {
+//   throw 'Could not launch $url';
+//   }
+// }
+
