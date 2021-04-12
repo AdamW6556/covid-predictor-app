@@ -30,7 +30,6 @@ class _CovidAppState extends State<CovidApp> {
     try {
       // Wait for loading data
       var predictionList = await apiService.getPredictionsListTest();
-      print(predictionList);
       setState(() => _initialized = true);
     } catch (e) {
       print(e);
