@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app1/services/api_service.dart';
+import 'package:flutter_app1/singleton/data_state.dart';
 import 'models/output.dart';
 import 'strings.dart';
 
@@ -29,12 +30,25 @@ class _ShowTableFragmentState extends State<ShowTableFragment> {
     throw Exception('There are no output at given date');
   }
 
+  bool dateExists(DateTime date, List<Output> outputs) {
+    for (var o in outputs) {
+      if (o.date.year == date.year &&
+          o.date.month == date.month &&
+          o.date.day == date.day) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /// * * * * * * GENERATE TABLE * * * * * *
-  void generateTable() async {
-    var apiService = ApiService();
-    var predictions = await apiService.getPredictionsListTest();
-    var reals = await apiService.getRealListTest();
+  void generateTable() {
+    var predictions = DataState.predictionList;
+    var reals = DataState.realList;
     var rows = <DataRow>[];
+
+    if (!dateExists(widget.selectedDate, predictions.first.outputs) ||
+        !dateExists(widget.selectedDate, reals.first.outputs)) return;
 
     // Iterate over all regions (prediction and real)
     for (var i = 0; i < predictions.length; i++) {

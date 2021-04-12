@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app1/services/api_service.dart';
 import 'package:flutter_app1/showtablefragment.dart';
+import 'package:flutter_app1/singleton/data_state.dart';
 import 'strings.dart';
 
 class TableMainFragment extends StatefulWidget {
@@ -18,17 +19,14 @@ class _TableMainFragmentState extends State<TableMainFragment> {
 
   /// * * * * * * SELECT DATE * * * * * *
   Future<Null> _selectDate(BuildContext context) async {
-    var apiService = ApiService();
-    var predictions = await apiService.getPredictionsListTest();
-
-    DateTime _datepicker = (await showDatePicker(
+    DateTime? _datepicker = await showDatePicker(
       context: context,
-      initialDate: predictions.first.outputs.first.date,
+      initialDate: DataState.predictionList.first.outputs.first.date,
       // firstDate: DateTime(2020),
       // lastDate: DateTime(2030),
-      firstDate: predictions.first.outputs.first.date,
-      lastDate: predictions.first.outputs.last.date,
-    ))!;
+      firstDate: DataState.predictionList.first.outputs.first.date,
+      lastDate: DataState.predictionList.first.outputs.last.date,
+    );
 
     if (_datepicker != null && _datepicker != _date) {
       setState(() {

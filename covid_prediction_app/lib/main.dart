@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app1/services/api_service.dart';
+import 'package:flutter_app1/singleton/data_state.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'strings.dart';
 import 'worldmapmain.dart';
@@ -29,7 +30,8 @@ class _CovidAppState extends State<CovidApp> {
 
     try {
       // Wait for loading data
-      var predictionList = await apiService.getPredictionsListTest();
+      DataState.predictionList = await apiService.getPredictionsListTest();
+      DataState.realList = await apiService.getRealListTest();
       setState(() => _initialized = true);
     } catch (e) {
       print(e);

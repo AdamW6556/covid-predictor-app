@@ -4,7 +4,7 @@ import 'package:flutter_app1/services/api_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('WebService', () {
+  group('ApiService', () {
     test('getting predictions body', () async {
       var apiService = ApiService();
       var body = await apiService.getPredictionsBody();
