@@ -10,6 +10,7 @@ import 'showmapfragment.dart';
 import 'showtablefragment.dart';
 import 'caseschartfragment.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'CovidRules.dart';
 
 void main() {
   runApp(CovidApp());
@@ -146,7 +147,12 @@ class MainFragment extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WorldMapMainFragment()),
+                      builder: (context) =>
+
+                          //WorldMapMainFragment()
+
+                      CovidRulesFragment()
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -155,7 +161,10 @@ class MainFragment extends StatelessWidget {
                 elevation: 20,
                 minimumSize: Size(300, 70),
               ),
-              child: Text('WORLD MAP',
+              child: Text(
+                  //'WORLD MAP'
+                  'COVID RULES'
+                  ,
                   style: TextStyle(
                     color: new Color(0xFF0277BD),
                     fontWeight: FontWeight.bold,

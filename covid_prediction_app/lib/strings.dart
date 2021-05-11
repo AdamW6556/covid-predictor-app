@@ -12,4 +12,7 @@ class Strings{
   static final eighttext = "GENERATE MAP FOR CHOSEN DATA:";
   static final ninthtext = "GENERATE TABLE FOR CHOSEN DATA:";
 
+  static final tenthtext = "ARE YOU FEELING SICK?";
+  static final eltext = "LEARN WHAT YOU HAVE TO DO!\n               CLICK BELOW:";
+  static final tvtext = "PROTECT YOURSELF FROM CORONAVIRUS:";
 }
